@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Modifier la Donnée Fluide{% endblock %}
+
+{% block content %}
+<h1>Modifier la Donnée Fluide</h1>
+<form method="POST">
+    <label for="date">Date :</label>
+    <input type="datetime-local" id="date" name="date" value="{{ data.date.strftime('%Y-%m-%dT%H:%M') }}">
+    <br>
+    <label for="debit">Débit :</label>
+    <input type="number" id="debit" name="debit" step="any" value="{{ data.debit }}" required>
+    <br>
+    <label for="pression">Pression :</label>
+    <input type="number" id="pression" name="pression" step="any" value="{{ data.pression }}" required>
+    <br>
+    <button type="submit">Enregistrer</button>
+</form>
+<a href="{{ url_for('data_routes.get_all_data') }}">Annuler</a>
+{% endblock %}

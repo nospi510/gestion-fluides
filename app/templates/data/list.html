@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}Liste des Données Fluides{% endblock %}
+
+{% block content %}
+<h1>Liste des Données Fluides</h1>
+
+<a href="{{ url_for('data_routes.create_data') }}" 
+    style="display: inline-block; margin-top: 20px; 
+   padding: 10px 15px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">
+   
+    sauvegarder de nouvelles données
+</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Débit</th>
+            <th>Pression</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for data in data %}
+        <tr>
+            <td>{{ data.id }}</td>
+            <td>{{ data.date }}</td>
+            <td>{{ data.debit }}</td>
+            <td>{{ data.pression }}</td>
+            <td>
+                <a href="{{ url_for('data_routes.get_data_details', id=data.id) }}">Détails</a> |
+                <a href="{{ url_for('data_routes.edit_data', id=data.id) }}">Modifier</a> |
+                <a href="#" class="delete-button" data-id="{{ data.id }}" 
+                    onclick="return confirm('Voulez-vous vraiment supprimer cette donnée ?');"
+                    style="color: red; text-decoration: none; font-weight: bold;">
+                    Supprimer
+                </a>
+                
+
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".delete-button");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const confirmed = confirm('Voulez-vous vraiment supprimer cette donnée ?');
+                if (!confirmed) {
+                    return;
+                }
+
+                const dataId = this.getAttribute("data-id");
+
+                fetch(`/data/${dataId}/delete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert(`Donnée ${dataId} supprimée avec succès.`);
+                        // Supprime la ligne correspondante dans le tableau
+                        this.closest('tr').remove();
+                    } else {
+                        alert("Une erreur s'est produite lors de la suppression.");
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+        });
+    });
+</script>
+{% endblock %}

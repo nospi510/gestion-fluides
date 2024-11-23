@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Modifier une Image{% endblock %}
+
+{% block content %}
+<h1>Modifier une Image</h1>
+<form method="POST">
+    <label for="filename">Nom du fichier :</label>
+    <input type="text" id="filename" name="filename" value="{{ image.filename }}" required>
+    <br>
+    <button type="submit">Enregistrer</button>
+</form>
+<a href="{{ url_for('image_routes.get_all_images') }}">Annuler</a>
+{% endblock %}

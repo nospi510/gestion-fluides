@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Détails de la Donnée Fluide{% endblock %}
+
+{% block content %}
+<div class="detail-ticket">
+    <h1>Détails de la Donnée Fluide</h1>
+    <p><strong>ID :</strong> {{ data.id }}</p>
+    <p><strong>Date :</strong> {{ data.date }}</p>
+    <p><strong>Débit :</strong> {{ data.debit }}</p>
+    <p><strong>Pression :</strong> {{ data.pression }}</p>
+
+    <div class="detail-actions">
+      <a href="{{ url_for('data_routes.get_all_data') }}">Retour à la liste</a>
+      <a href="{{ url_for('data_routes.edit_data', id=data.id) }}">Modifier</a>
+      <a href="#" class="delete-button" data-id="{{ data.id }}" 
+         onclick="return confirm('Voulez-vous vraiment supprimer cette donnée ?');">
+         Supprimer
+      </a>
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".delete-button");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const confirmed = confirm('Voulez-vous vraiment supprimer cette donnée ?');
+                if (!confirmed) {
+                    return;
+                }
+
+                const dataId = this.getAttribute("data-id");
+
+                fetch(`/data/${dataId}/delete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert(`Donnée ${dataId} supprimée avec succès.`);
+                        // Supprime la ligne correspondante dans le tableau
+                        this.closest('tr').remove();
+                    } else {
+                        alert("Une erreur s'est produite lors de la suppression.");
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+        });
+    });
+</script>
+{% endblock %}
+

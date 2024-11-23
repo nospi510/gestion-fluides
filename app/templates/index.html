@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="index-container">
+    <h1>Gestion des Fluides</h1>
+    <p> <strong>Gérez les données des fluides, les plans du site et les rapports.</strong></p>
+    <div class="index-links">
+        <div class="top-links">
+            <a href="{{ url_for('data_routes.create_data') }}">Enregistrer les données <br> des fluides</a>
+            <a href="{{ url_for('image_routes.upload_image') }}">Importer des plans</a>
+        </div>
+        <div class="bottom-link">
+            <a href="{{ url_for('report_routes.create_report') }}">Faire un rapport</a>
+        </div>
+        <br>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,614 @@
+/* Style général */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #e6f7ff; /* Bleu ciel clair */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Conteneur principal */
+main {
+    flex: 1; /* Prend tout l'espace disponible entre le header et le footer */
+    max-width: 1000px;
+    margin: 10px auto;
+}
+
+/* Header et barre de navigation */
+header {
+    background-color: #004080; /* Bleu marine */
+    padding: 10px 0;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 1;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header nav ul li {
+    margin: 0 15px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #ffffff; /* Blanc */
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+header nav ul li a:hover {
+    background-color: #1a75ff; /* Bleu exotique */
+    transform: scale(1.1);
+}
+
+/* Pied de page */
+footer {
+    background-color: #004080; /* Même couleur que la barre de navigation */
+    color: #ffffff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+
+
+/* Styles pour le template index.html */
+.index-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    background-color: #ffffff; /* Fond blanc pour contraste */
+    border-radius: 15px; /* Bords incurvés */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Léger ombrage */
+    border: 2px solid #1a75ff; /* Bordure bleue exotique */
+    margin-top: 10px; /* Pour ajuster avec l'entête */
+    
+}
+
+.index-container p, .index-links {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px; /* Bord incurvé */
+    margin: 10px 0;
+}
+
+
+
+
+.index-container h1 {
+    font-size: 2.5rem;
+    color: #004080; /* Bleu marine */
+    margin-bottom: 15px;
+}
+
+.index-container p {
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.index-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Espacement vertical entre les blocs */
+    width: 100%;
+}
+
+.index-links .top-links {
+    display: flex;
+    justify-content: center;
+    gap: 50px; /* Espacement horizontal entre les deux liens */
+}
+
+.index-links .bottom-link {
+    margin-top: 20px;
+}
+
+/* Liens stylisés */
+.index-links a {
+    background-color: #1a75ff; /* Bleu exotique */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 15px 25px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.index-links a:hover {
+    background-color: #004080; /* Bleu marine */
+    transform: translateY(-3px); /* Léger soulèvement au survol */
+}
+
+/* Style pour le conteneur du formulaire */
+form {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #ffffff; /* Fond blanc */
+    padding: 20px 30px;
+    border-radius: 15px; /* Bords incurvés */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre légère */
+    border: 2px solid #e6f7ff; /* Bordure fine et douce */
+}
+
+/* Style pour les titres */
+form label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    color: #004080; /* Texte en bleu marine */
+    font-weight: bold;
+}
+
+/* Champs de formulaire */
+form input {
+    width: 100%; /* Uniformiser la taille */
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #1a75ff; /* Bleu exotique */
+    border-radius: 8px; /* Bords incurvés */
+    font-size: 1rem;
+    box-sizing: border-box; /* Empêche le dépassement */
+    outline: none; /* Retire le contour bleu par défaut */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+form input:focus {
+    border-color: #004080; /* Bleu marine au focus */
+    box-shadow: 0px 0px 8px rgba(0, 64, 128, 0.2); /* Ombre au focus */
+}
+
+/* Bouton de soumission */
+form button {
+     display: inline-block; /* Agit comme un lien */
+    text-decoration: none; /* Supprime les styles par défaut */
+    padding: 5px 10px; /* Ajustez si nécessaire */
+    font-size: 0.9rem; /* Correspond au texte des liens */
+    font-weight: bold; /* Assure une police similaire aux liens */
+    background-color: #1a75ff; /* Rouge vif pour supprimer */
+    color: #ffffff; /* Texte blanc */
+    border: none; /* Supprime les bordures */
+    border-radius: 4px; /* Angle arrondi */
+    cursor: pointer; /* Indique une action cliquable */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+form button:hover {
+    background-color: #004080; /* Bleu marine */
+    transform: scale(1.05); /* Léger agrandissement au survol */
+}
+
+/* Lien d'annulation */
+form a {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #004080; /* Bleu marine */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+form a:hover {
+    color: #1a75ff; /* Bleu exotique */
+}
+
+/* Message d'erreur */
+form p {
+    color: red; /* Couleur rouge pour les erreurs */
+    font-weight: bold;
+    text-align: center;
+    margin-top: -10px;
+}
+
+/* Centrage du titre */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #004080; /* Bleu marine */
+    margin-bottom: 20px;
+}
+
+/* Style pour le conteneur principal */
+table {
+    width: 100%; /* Prend toute la largeur disponible */
+    margin: 20px auto;
+    border-collapse: collapse; /* Supprime les espaces entre les cellules */
+    background-color: #ffffff; /* Fond blanc */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    border-radius: 8px; /* Bords incurvés */
+    overflow: hidden; /* Applique les coins arrondis */
+}
+
+/* En-têtes du tableau */
+table thead {
+    background-color: #004080; /* Bleu marine */
+    color: #ffffff; /* Texte blanc */
+}
+
+table thead th {
+    padding: 15px;
+    font-size: 1rem;
+    text-align: left; /* Aligne les titres à gauche */
+    border-bottom: 2px solid #e6f7ff; /* Ligne de séparation claire */
+}
+
+/* Corps du tableau */
+table tbody td {
+    padding: 12px 15px;
+    font-size: 0.9rem;
+    color: #333333; /* Gris foncé */
+    border-bottom: 1px solid #f2f2f2; /* Ligne de séparation douce */
+}
+
+/* Alternance des lignes */
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Gris clair pour les lignes impaires */
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #ffffff; /* Blanc pour les lignes paires */
+}
+
+/* Lien et bouton dans les actions */
+table tbody td a {
+    color: #1a75ff; /* Bleu exotique */
+    text-decoration: none; /* Supprime le soulignement */
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+table tbody td a:hover {
+    color: #004080; /* Bleu marine au survol */
+}
+
+table tbody td form button {
+    display: inline-block; /* Agit comme un lien */
+    text-decoration: none; /* Supprime les styles par défaut */
+    padding: 5px 10px; /* Ajustez si nécessaire */
+    font-size: 0.9rem; /* Correspond au texte des liens */
+    font-weight: bold; /* Assure une police similaire aux liens */
+    background-color: #ff4d4d; /* Rouge vif pour supprimer */
+    color: #ffffff; /* Texte blanc */
+    border: none; /* Supprime les bordures */
+    border-radius: 4px; /* Angle arrondi */
+    cursor: pointer; /* Indique une action cliquable */
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+table tbody td button:hover {
+    background-color: #cc0000; /* Rouge plus sombre au survol */
+    transform: scale(1.05); /* Léger agrandissement */
+}
+
+
+
+/* Centrage du titre */
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    color: #004080; /* Bleu marine */
+    margin-bottom: 20px;
+}
+
+
+
+/* Style pour le conteneur du ticket */
+.detail-ticket {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fffaf0; /* Fond blanc cassé */
+    padding: 20px;
+    border-radius: 15px;
+    border: 3px dashed #1a75ff; /* Bordures ondulées avec bleu exotique */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    position: relative;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Bordures ondulées (ajustement décoratif) */
+.detail-ticket:before, 
+.detail-ticket:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    background: url('path-to-waves-image.png') repeat-x; /* Mettre un fichier d'image de vagues */
+    top: -10px; /* Position supérieure */
+    left: 0;
+}
+
+.detail-ticket:after {
+    top: auto;
+    bottom: -10px; /* Position inférieure */
+}
+
+/* Style pour le titre */
+.detail-ticket h1 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #004080; /* Bleu marine */
+    margin-bottom: 15px;
+}
+
+/* Style pour les champs de données */
+.detail-ticket p {
+    font-size: 1rem;
+    color: #333; /* Texte gris foncé */
+    margin: 10px 0;
+}
+
+.detail-ticket p strong {
+    color: #004080; /* Bleu marine pour les titres des champs */
+}
+
+/* Style pour les boutons hors du ticket */
+.detail-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Espacement entre les boutons */
+    margin-top: 20px;
+}
+
+.detail-actions a {
+    background-color: #1a75ff; /* Bleu exotique */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px; /* Bord incurvé */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.detail-actions a:hover {
+    background-color: #004080; /* Bleu marine */
+    transform: scale(1.05); /* Agrandissement au survol */
+}
+
+/* Style pour le bouton "Supprimer" */
+.detail-actions .delete-button {
+    background-color: #ff4d4d; /* Rouge vif */
+    color: #ffffff; 
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.detail-actions .delete-button:hover {
+    background-color: #cc0000; /* Rouge foncé */
+    transform: scale(1.05);
+}
+
+
+/* Conteneur principal pour l'image */
+.image-detail {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fffaf0; /* Fond blanc cassé */
+    border-radius: 15px;
+    border: 2px solid #1a75ff; /* Bordure fine bleue */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Style du titre */
+.image-detail h1 {
+    font-size: 1.5rem;
+    color: #004080; /* Bleu marine */
+    margin-bottom: 15px;
+}
+
+/* Style des champs d'information */
+.image-detail p {
+    font-size: 1rem;
+    color: #333; /* Texte gris foncé */
+    margin: 10px 0;
+}
+
+.image-detail p strong {
+    color: #004080; /* Bleu marine pour les titres des champs */
+}
+
+/* Image principale */
+.image-detail img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px; /* Coins arrondis */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animation au survol */
+    cursor: pointer;
+}
+
+/* Effet au survol de l'image */
+.image-detail img:hover {
+    transform: scale(1.1); /* Agrandissement */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Ombre plus marquée */
+}
+
+/* Style pour les actions sous l'image */
+.detail-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.detail-actions a {
+    background-color: #1a75ff; /* Bleu exotique */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px; /* Bord incurvé */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.detail-actions a:hover {
+    background-color: #004080; /* Bleu marine */
+    transform: scale(1.05); /* Agrandissement au survol */
+}
+
+/* Style pour le bouton "Supprimer" */
+.detail-actions .delete-button {
+    background-color: #ff4d4d; /* Rouge vif */
+    color: #ffffff; 
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.detail-actions .delete-button:hover {
+    background-color: #cc0000; /* Rouge foncé */
+    transform: scale(1.05);
+}
+
+/* Image en plein écran */
+.fullscreen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fond semi-transparent noir */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.fullscreen-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5); /* Ombre sur l'image */
+    cursor: pointer;
+}
+
+.report-container {
+    width: 100%;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 20mm;
+    font-family: 'Times New Roman', serif;
+    background-color: white;
+    border: 1px solid #ccc;
+}
+
+.report-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.logo-img {
+    width: 80px;
+    height: auto;
+}
+
+.report-info {
+    text-align: right;
+}
+
+.report-title {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.report-title h2 {
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+.report-body {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.report-body p {
+    margin: 10px 0;
+}
+
+.report-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.action-link, .download-pdf {
+    text-decoration: none;
+    color: #007BFF;
+    margin: 5px 15px;
+    font-weight: bold;
+}
+
+.delete-button {
+    color: red;
+}
+
+.download-pdf {
+    color: green;
+}
+
+/* Style pour l'impression */
+@media print {
+    .report-container {
+        margin: 0;
+        padding: 0;
+        border: none;
+        background-color: white;
+        width: 210mm;
+    }
+
+    .report-title h2 {
+        font-size: 2em;
+    }
+
+    .report-header {
+        display: block;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .report-info {
+        text-align: center;
+    }
+
+    .report-actions {
+        display: none;
+    }
+
+    .download-pdf {
+        display: none;
+    }
+}

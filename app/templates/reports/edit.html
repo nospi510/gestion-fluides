@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Modifier le Rapport{% endblock %}
+
+{% block content %}
+<h1>Modifier le Rapport</h1>
+<form method="POST">
+    <label for="title">Titre :</label>
+    <input type="text" id="title" name="title" value="{{ report.title }}" required>
+    <br>
+    <label for="content">Contenu :</label>
+    <textarea id="content" name="content" required>{{ report.content }}</textarea>
+    <br>
+    <label for="observations">Observations :</label>
+    <textarea id="observations" name="observations">{{ report.observations }}</textarea>
+    <br>
+    <button type="submit">Enregistrer</button>
+</form>
+<a href="{{ url_for('report_routes.get_all_reports') }}">Annuler</a>
+{% endblock %}

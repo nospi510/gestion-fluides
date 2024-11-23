@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Détails du Rapport{% endblock %}
+
+{% block content %}
+<div class="report-container">
+    <!-- En-tête avec logo et informations en haut à droite -->
+    <div class="report-header">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo-img" width="10%">
+        </div>
+        <div class="report-info">
+            <p><strong>Date :</strong> {{ report.created_at }}</p>
+        </div>
+    </div>
+
+    <!-- Titre du rapport centré -->
+    <div class="report-title">
+        <h2>{{ report.title }}</h2>
+    </div>
+
+    <!-- Corps du rapport avec des phrases pré-écrites -->
+    <div class="report-body">
+        <p><strong>Introduction :</strong></p>
+        <p>Le présent rapport a été rédigé dans le cadre de {{ report.title }}. Il présente les informations suivantes :</p>
+
+        <p><strong>Contenu :</strong></p>
+        <p>{{ report.content }}</p>
+        
+        <p><strong>Observations :</strong></p>
+        <p>{{ report.observations }}</p>
+
+        <p><strong>Conclusion :</strong></p>
+        <p>En conclusion, ce rapport permet de tirer les enseignements suivants : ...</p>
+    </div>
+<br>
+
+<!-- Actions sous le rapport -->
+<div class="report-actions">
+  <a href="{{ url_for('report_routes.get_all_reports') }}" class="action-link">Retour à la liste</a>
+  <a href="{{ url_for('report_routes.edit_report', id=report.id) }}" class="action-link">Modifier</a>
+  <a href="#" class="delete-button" data-id="{{ report.id }}" 
+    onclick="return confirm('Voulez-vous vraiment supprimer ce rapport ?');" 
+     style="color: red; text-decoration: none; font-weight: bold;">
+     Supprimer
+  </a>
+  <a href="#" class="download-pdf" onclick="downloadPDF();">Télécharger en PDF</a>
+</div>
+    
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+    function deleteReport(reportId) {
+        if (confirm('Voulez-vous vraiment supprimer ce rapport ?')) {
+            fetch(`/reports/${reportId}/delete`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Le rapport a été supprimé avec succès.');
+                    location.reload();
+                } else {
+                    alert('Erreur lors de la suppression du rapport.');
+                }
+            })
+            .catch(error => {
+                alert('Une erreur est survenue.');
+                console.error(error);
+            });
+        }
+    }
+
+    // Fonction pour télécharger le rapport en PDF
+    function downloadPDF() {
+        const reportContent = document.querySelector('.report-container').innerHTML;
+        const doc = new jsPDF();
+
+        doc.html(reportContent, {
+            callback: function (doc) {
+                doc.save(`${document.title}.pdf`);
+            },
+            margin: [10, 10, 10, 10]
+        });
+    }
+</script>
+{% endblock %}

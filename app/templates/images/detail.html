@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Détails de plan{% endblock %}
+
+{% block content %}
+<div class="image-detail">
+  <h1>Détails du plan</h1>
+  <p><strong>ID :</strong> {{ image.id }}</p>
+  <p><strong>Nom :</strong> {{ image.filename }}</p>
+  <br>
+  <img src="{{ url_for('static', filename='uploads/' ~ image.filename) }}" alt="Image" onclick="openFullscreen(this)">
+
+  <div class="detail-actions">
+    <a href="{{ url_for('image_routes.get_all_images') }}">Retour à la liste</a>
+    <a href="{{ url_for('image_routes.edit_image', id=image.id) }}">Modifier</a>
+    <a href="#" class="delete-button" data-id="{{ image.id }}" 
+       onclick="return confirm('Voulez-vous vraiment supprimer ce plan ?');">
+       Supprimer
+    </a>
+  </div>
+</div>
+
+
+
+<!-- Overlay pour l'image en plein écran -->
+<div class="fullscreen-overlay" onclick="closeFullscreen()">
+  <img id="fullscreen-image" src="" alt="Image plein écran">
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const deleteButtons = document.querySelectorAll(".delete-button");
+
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const confirmed = confirm('Voulez-vous vraiment supprimer cette image ?');
+                if (!confirmed) {
+                    return;
+                }
+
+                const imageId = this.getAttribute("data-id");
+
+                fetch(`/images/${imageId}/delete`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        alert(`Image ${imageId} supprimée avec succès.`);
+                        // Supprime la ligne correspondante dans le tableau
+                        this.closest('tr').remove();
+                    } else {
+                        alert("Une erreur s'est produite lors de la suppression.");
+                    }
+                })
+                .catch(error => console.error('Erreur:', error));
+            });
+        });
+    });
+
+          function openFullscreen(image) {
+          const overlay = document.querySelector('.fullscreen-overlay');
+          const fullscreenImage = document.getElementById('fullscreen-image');
+          fullscreenImage.src = image.src;
+          overlay.style.display = 'flex';
+      }
+
+      function closeFullscreen() {
+          const overlay = document.querySelector('.fullscreen-overlay');
+          overlay.style.display = 'none';
+      }
+</script>
+{% endblock %}
+

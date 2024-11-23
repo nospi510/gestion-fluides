@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Gestion des Fluides{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('index.index') }}">Accueil</a></li>
+                <li><a href="{{ url_for('data_routes.get_all_data') }}">Données Fluides</a></li>
+                <li><a href="{{ url_for('image_routes.get_all_images') }}">Plans</a></li>
+                <li><a href="{{ url_for('report_routes.get_all_reports') }}">Rapports</a></li>
+                <li><a href="{{ url_for('credits_routes.credits') }}">Crédits</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+        {% block scripts %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Gestion des Fluides. Tous droits réservés.</p>
+    </footer>
+</body>
+</html>

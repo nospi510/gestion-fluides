@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}Créer une Nouvelle Donnée Fluide{% endblock %}
+
+{% block content %}
+<form method="POST" id="form">
+    <h1>Enregistrer une Nouvelle <br>Donnée</h1><br>
+
+    <!-- Champ de Date pré-rempli -->
+    <label for="date">Date :</label>
+    <input type="datetime-local" id="date" name="date" value="{{ today_date }}" required>
+    <br>
+
+    <!-- Formulaire pour le débit et la pression -->
+    <div id="debit-pression-forms">
+        <div class="debit-pression-form">
+            <label for="debit">Débit :</label>
+            <input type="number" name="debit" step="any" required>
+            <br>
+            <label for="pression">Pression :</label>
+            <input type="number" name="pression" step="any" required>
+            <br>
+            <!-- Bouton "-" pour supprimer le formulaire ajouté -->
+            <button type="button" class="remove-form" style="color: red; font-weight: bold;">-</button>
+        </div>
+    </div>
+    <br>
+
+    <!-- Bouton pour ajouter plus de formulaires -->
+    <button type="button" id="add-form">+</button>
+    <br><br>
+
+    <button type="submit">Créer</button>
+</form>
+
+{% if error %}
+<p style="color: red;">{{ error }}</p>
+{% endif %}
+
+<a href="{{ url_for('data_routes.get_all_data') }}">Annuler</a>
+
+{% block scripts %}
+<script>
+    // Remplir automatiquement la date du jour
+    document.getElementById("date").value = new Date().toISOString().slice(0, 16);
+
+    // Ajouter un formulaire pour les champs Débit et Pression
+    document.getElementById("add-form").addEventListener("click", function() {
+        const newForm = document.createElement("div");
+        newForm.classList.add("debit-pression-form");
+        newForm.innerHTML = `
+            <label for="debit">Débit :</label>
+            <input type="number" name="debit" step="any" required>
+            <br>
+            <label for="pression">Pression :</label>
+            <input type="number" name="pression" step="any" required>
+            <br>
+            <!-- Bouton "-" pour supprimer le formulaire ajouté -->
+            <button type="button" class="remove-form" style="color: red; font-weight: bold;">-</button>
+        `;
+        document.getElementById("debit-pression-forms").appendChild(newForm);
+    });
+
+    // Supprimer un formulaire ajouté
+    document.getElementById("debit-pression-forms").addEventListener("click", function(event) {
+        if (event.target.classList.contains("remove-form")) {
+            const formToRemove = event.target.closest(".debit-pression-form");
+            formToRemove.remove();
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}
