@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Gestion des Fluides{% endblock %}</title>
+    <title>{% block title %}Gestion des Fluides Medicaux{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
@@ -16,7 +16,7 @@
                 <li><a href="{{ url_for('data_routes.get_all_data') }}">Données Fluides</a></li>
                 <li><a href="{{ url_for('image_routes.get_all_images') }}">Plans</a></li>
                 <li><a href="{{ url_for('report_routes.get_all_reports') }}">Rapports</a></li>
-                <li><a href="{{ url_for('credits_routes.credits') }}">Crédits</a></li>
+                <li><a href="{{ url_for('credits_routes.credits') }}">A propos</a></li>
 
                  <!-- Affichage du nom et rôle de l'utilisateur connecté -->
                  {% if 'user_id' in session %}
