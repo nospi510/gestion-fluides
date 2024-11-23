@@ -17,11 +17,34 @@
                 <li><a href="{{ url_for('image_routes.get_all_images') }}">Plans</a></li>
                 <li><a href="{{ url_for('report_routes.get_all_reports') }}">Rapports</a></li>
                 <li><a href="{{ url_for('credits_routes.credits') }}">Crédits</a></li>
+
+                 <!-- Affichage du nom et rôle de l'utilisateur connecté -->
+                 {% if 'user_id' in session %}
+                    <li class="user-info">
+                        <span>Connecté en tant que {{ session['role'] }} : {{ session['name'] }}</span> <!-- Affiche le nom -->
+                    </li>
+                {% endif %}
+
+                <li class="logout">
+                    <a href="{{ url_for('auth_routes.logout') }}">Déconnexion</a>
+                </li>
             </ul>
         </nav>
     </header>
 
     <main>
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div id="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
         {% block content %}{% endblock %}
         {% block scripts %}{% endblock %}
     </main>

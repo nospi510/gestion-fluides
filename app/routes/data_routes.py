@@ -2,22 +2,27 @@ from flask import Blueprint, request, jsonify, render_template, redirect, url_fo
 from .. import db
 from app.models import FluidData
 from datetime import datetime
+from app.routes.middleware import role_required
 
 bp = Blueprint('data_routes', __name__, url_prefix='/data')
 
+
 @bp.route('/', methods=['GET'])
+@role_required(['technicien', 'ingenieur'])
 def get_all_data():
     """Affiche la liste de toutes les données fluides."""
     data = FluidData.query.all()
     return render_template('data/list.html', data=data)
 
 @bp.route('/<int:id>', methods=['GET'])
+@role_required(['technicien', 'ingenieur'])
 def get_data_details(id):
     """Affiche les détails d'une donnée fluide spécifique."""
     data = FluidData.query.get_or_404(id)
     return render_template('data/detail.html', data=data)
 
 @bp.route('/create', methods=['GET', 'POST'])
+@role_required(['technicien', 'ingenieur'])
 def create_data():
     """Crée une nouvelle donnée fluide."""
     if request.method == 'POST':
@@ -49,6 +54,7 @@ def create_data():
 
 
 @bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@role_required(['ingenieur'])
 def edit_data(id):
     """Modifie les informations d'une donnée fluide existante."""
     data = FluidData.query.get_or_404(id)
@@ -65,6 +71,7 @@ def edit_data(id):
     return render_template('data/edit.html', data=data)
 
 @bp.route('/<int:id>/delete', methods=['POST'])
+@role_required(['ingenieur'])
 def delete_data(id):
     """Supprime une donnée fluide."""
     data = FluidData.query.get_or_404(id)

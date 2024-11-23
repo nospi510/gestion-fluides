@@ -51,6 +51,25 @@ header nav ul li a:hover {
     transform: scale(1.1);
 }
 
+/* Bouton de déconnexion à droite */
+nav ul .logout {
+    margin-left: auto; /* Pousse cet élément complètement à droite */
+}
+
+nav ul .logout a {
+    background-color: #ff4d4d; /* Rouge vif */
+    color: #ffffff;
+    padding: 8px 15px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+nav ul .logout a:hover {
+    background-color: #cc0000; /* Rouge foncé au survol */
+    transform: scale(1.1); /* Agrandissement au survol */
+}
+
 /* Pied de page */
 footer {
     background-color: #004080; /* Même couleur que la barre de navigation */
@@ -612,3 +631,48 @@ h1 {
         display: none;
     }
 }
+
+
+.alert {
+    padding: 5px 15px; /* Réduit l'espace vertical et horizontal */
+    margin: 5px auto; /* Réduit l'espace entre les alertes et centre les alertes */
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 1.2;
+    max-width: 400px; /* Limite la largeur à 400px */
+    width: 100%; /* S'adapte à la largeur de son conteneur */
+    text-align: center; /* Centre le texte */
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Afficher les informations de l'utilisateur connecté */
+header nav ul .user-info {
+    margin-left: auto; /* Pousse cet élément vers la droite, avant le bouton de déconnexion */
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: normal;
+}
+
+/* Ajuster l'apparence du nom et du rôle de l'utilisateur */
+header nav ul .user-info span {
+    font-size: 14px;
+    color: #fff;  /* Assure que le texte soit visible sur fond sombre */
+    padding: 5px 10px;
+    background-color: #0066cc; /* Un fond légèrement plus bleu pour différencier */
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+

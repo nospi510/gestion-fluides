@@ -1,21 +1,26 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 from app.models import Report, db
+from app.routes.middleware import role_required
+
 
 bp = Blueprint('report_routes', __name__, url_prefix='/reports')
 
 @bp.route('/', methods=['GET'])
+@role_required(['technicien', 'ingenieur'])
 def get_all_reports():
     """Affiche la liste de tous les rapports."""
     reports = Report.query.all()
     return render_template('reports/list.html', reports=reports)
 
 @bp.route('/<int:id>', methods=['GET'])
+@role_required(['technicien', 'ingenieur'])
 def get_report_details(id):
     """Affiche les détails d'un rapport spécifique."""
     report = Report.query.get_or_404(id)
     return render_template('reports/detail.html', report=report)
 
 @bp.route('/create', methods=['GET', 'POST'])
+@role_required(['technicien', 'ingenieur'])
 def create_report():
     """Crée un nouveau rapport."""
     if request.method == 'POST':
@@ -33,6 +38,7 @@ def create_report():
     return render_template('reports/create.html')
 
 @bp.route('/<int:id>/edit', methods=['GET', 'POST'])
+@role_required(['ingenieur'])
 def edit_report(id):
     """Modifie les informations d'un rapport existant."""
     report = Report.query.get_or_404(id)
@@ -46,6 +52,7 @@ def edit_report(id):
     return render_template('reports/edit.html', report=report)
 
 @bp.route('/<int:id>/delete', methods=['POST'])
+@role_required([ 'ingenieur'])
 def delete_report(id):
     """Supprime un rapport."""
     report = Report.query.get_or_404(id)
