@@ -1,0 +1,86 @@
+# Gestion des Fluides - Application Flask
+
+Ce projet est une application de gestion des fluides médicaux utilisant Flask et une base de données MySQL/MariaDB. Suivez les instructions ci-dessous pour configurer et exécuter l'application sur Windows et Ubuntu.
+
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
+
+- **Python 3.x** (Téléchargez-le depuis [python.org](https://www.python.org/downloads/))
+- **MySQL ou MariaDB** (pour la gestion de la base de données) - Assurez-vous que le serveur est en cours d'exécution.
+
+### Étapes d'installation
+
+1. Naviguer dans le dossier du projet : cd gestion-fluides
+
+2. À l'interieur Créer un environnement virtuel
+
+# Sur Windows
+
+ * Ouvrez votre terminal (CMD ou PowerShell) et naviguez dans le dossier du projet.
+
+    Créez un environnement virtuel :
+
+        python -m venv venv
+
+ * Activez l'environnement virtuel :
+
+    .\venv\Scripts\activate
+
+# Sur Ubuntu
+
+ * Ouvrez votre terminal et naviguez dans le dossier du projet.
+
+ * Créez un environnement virtuel :
+
+    python3 -m venv venv
+
+
+
+# Activez l'environnement virtuel :
+
+    source venv/bin/activate
+
+
+
+3. Installer les dépendances
+
+ * Une fois l'environnement virtuel activé, installez les dépendances du projet à partir du fichier requirements.txt :
+
+        pip install -r requirements.txt
+
+4. Configuration de la base de données
+
+   Assurez-vous d'avoir une base de données MariaDB/MySQL configurée.
+
+ * Connecter vous à votre serveur de base de donné et créer la base de données : fluide_db
+
+  Vous devrez ajuster la configuration de la base de données dans votre application Flask dans le fichier 
+  app/__init__.py et changer le nom de l'utilisateur de la bdd par votre utilisateur mysql et par votre mot de passe 
+
+5. Executer l'application 
+  
+  * Executer la commande : python3 run.py  
+
+  NB: Après cela, il faudra imperativement avoir un utilisateur pour acceder à l'application 
+  Pour l'unique fois executer le fichier test/create_test_user.py comme suit dans une autre fenetre du terminal
+
+  python3 test/create_test_user.py
+
+  * Et l'utilisateur test sera creer 
+  identifiant : test 
+  mot de passe : test 
+
+  Et vous pourrez par la suite vous connecter avec ce utilisateur et se rendre sur : 
+  http://localhost:5001/auth/users/create 
+  
+  et creer votre utilisateur avec son role 
+
+
+  * Pour supprimer l'utilisateur test après avoir créé votre utilisateur executer le fichier test/delete_test_user.py dans une autre fenetre du terminal 
+
+    python3 test/delete_test_user.py
+
+ 
+
+
