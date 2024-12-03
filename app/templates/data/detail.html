@@ -3,13 +3,14 @@
 {% block title %}Détails de la Donnée Fluide{% endblock %}
 
 {% block content %}
+
 <div class="detail-ticket">
     <h1>Détails de la Donnée Fluide</h1>
     <p><strong>ID :</strong> {{ data.id }}</p>
     <p><strong>Date :</strong> {{ data.date }}</p>
     <p><strong>Débit :</strong> {{ data.debit }}</p>
     <p><strong>Pression :</strong> {{ data.pression }}</p>
-
+    <p><strong>Créé par :</strong> {{ data.user.name }}</p>
     <div class="detail-actions">
       <a href="{{ url_for('data_routes.get_all_data') }}">Retour à la liste</a>
       <a href="{{ url_for('data_routes.edit_data', id=data.id) }}">Modifier</a>
@@ -19,6 +20,7 @@
       </a>
   </div>
 </div>
+
 
 
 {% endblock %}

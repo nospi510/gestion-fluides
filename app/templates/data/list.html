@@ -19,6 +19,7 @@
             <th>Date</th>
             <th>Débit</th>
             <th>Pression</th>
+            <th>Créé par</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -29,6 +30,7 @@
             <td>{{ data.date }}</td>
             <td>{{ data.debit }}</td>
             <td>{{ data.pression }}</td>
+            <td> {{ data.user.name }} </td> 
             <td>
                 <a href="{{ url_for('data_routes.get_data_details', id=data.id) }}">Détails</a> |
                 <a href="{{ url_for('data_routes.edit_data', id=data.id) }}">Modifier</a> |
@@ -37,13 +39,12 @@
                     style="color: red; text-decoration: none; font-weight: bold;">
                     Supprimer
                 </a>
-                
-
             </td>
         </tr>
         {% endfor %}
     </tbody>
 </table>
+
 
 {% endblock %}
 

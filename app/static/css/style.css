@@ -675,4 +675,32 @@ header nav ul .user-info span {
     margin-right: 10px;
 }
 
+.about-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid #007bff; /* Bleu clair */
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.about-container h1 {
+    color: #0056b3; /* Bleu marine */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.about-container p {
+    line-height: 1.6;
+    font-size: 1rem;
+    color: #333;
+    text-align: justify;
+}
+
+.about-container strong {
+    color: #0056b3;
+}
+
+
 

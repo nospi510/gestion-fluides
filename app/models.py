@@ -1,7 +1,8 @@
-from . import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash, check_password_hash
-
+from sqlalchemy.orm import relationship
+from flask_login import UserMixin
+from . import db 
 
 class FluidData(db.Model):
     __tablename__ = 'fluid_data'
@@ -13,6 +14,10 @@ class FluidData(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     updated_at = db.Column(db.DateTime, onupdate=datetime.utcnow)
 
+    # Nouvelle clé étrangère pour l'utilisateur
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user = relationship('User', backref='fluid_data')
+
     def __repr__(self):
         return f"<FluidData {self.id}>"
 
@@ -23,7 +28,8 @@ class FluidData(db.Model):
             "debit": self.debit,
             "pression": self.pression,
             "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "updated_at": self.updated_at,
+            "user": self.user.to_dict() if self.user else None
         }
 
 class Image(db.Model):
@@ -48,7 +54,7 @@ class Report(db.Model):
     def __repr__(self):
         return f"<Report {self.title}>"
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -62,4 +68,3 @@ class User(db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
-

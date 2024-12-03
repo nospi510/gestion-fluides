@@ -1,8 +1,9 @@
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for,flash,session
 from .. import db
 from app.models import FluidData
 from datetime import datetime
 from app.routes.middleware import role_required
+
 
 bp = Blueprint('data_routes', __name__, url_prefix='/data')
 
@@ -21,9 +22,47 @@ def get_data_details(id):
     data = FluidData.query.get_or_404(id)
     return render_template('data/detail.html', data=data)
 
+
 @bp.route('/create', methods=['GET', 'POST'])
 @role_required(['technicien', 'ingenieur'])
 def create_data():
+    """Crée une nouvelle donnée fluide."""
+    if request.method == 'POST':
+        # Récupérer l'ID de l'utilisateur depuis la session
+        user_id = session.get('user_id')  # Assurez-vous que vous avez stocké 'user_id' dans la session
+
+        # Vérifier que l'ID de l'utilisateur est valide
+        if not user_id:
+            flash("Utilisateur non connecté", "danger")
+            return redirect(url_for('auth_routes.login'))
+
+        date = request.form.get('date')
+        debit_list = request.form.getlist('debit')  # Récupère toutes les valeurs de débit
+        pression_list = request.form.getlist('pression')  # Récupère toutes les valeurs de pression
+
+        if not debit_list or not pression_list:
+            return render_template('data/create.html', error="Le débit et la pression sont obligatoires.")
+        
+        if len(debit_list) != len(pression_list):
+            return render_template('data/create.html', error="Le nombre de débits et de pressions ne correspond pas.")
+
+        # Création des nouveaux enregistrements
+        for debit, pression in zip(debit_list, pression_list):
+            new_data = FluidData(
+                date=datetime.strptime(date, '%Y-%m-%dT%H:%M') if date else datetime.utcnow(),
+                debit=float(debit),
+                pression=float(pression),
+                user_id=user_id  # Associer l'utilisateur connecté à la donnée fluide
+            )
+            db.session.add(new_data)
+        
+        db.session.commit()
+        return redirect(url_for('data_routes.get_all_data'))
+
+    # Calculer la date actuelle pour pré-remplir le champ
+    today_date = datetime.utcnow().strftime('%Y-%m-%dT%H:%M')
+    return render_template('data/create.html', today_date=today_date)
+
     """Crée une nouvelle donnée fluide."""
     if request.method == 'POST':
         date = request.form.get('date')
