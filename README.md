@@ -1,4 +1,3 @@
-````markdown
 # 🧪 Gestion des Fluides - Application Flask
 
 Ce projet est une application de gestion des fluides médicaux utilisant **Flask** et une base de données **MySQL/MariaDB**.  
